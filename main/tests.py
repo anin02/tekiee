@@ -1,54 +1,25 @@
 from django.test import TestCase, Client
-from .models import Product
-from django.utils import timezone
+from django.urls import reverse
 
-class TekieeTest(TestCase):
+class ShowMainViewTest(TestCase):
     def setUp(self):
-        # Buat beberapa produk contoh untuk digunakan dalam tes
-        Product.objects.create(
-            name="Cool Sunglasses",
-            price=150,
-            description="Stylish sunglasses with UV protection.",
-            frame_material="Plastic",
-            lens_type="UV",
-            color="Black",
-            size="Medium",
-            stock=20,
-            brand="SunGlare"
-        )
-        Product.objects.create(
-            name="Classic Reading Glasses",
-            price=80,
-            description="Comfortable reading glasses for daily use.",
-            frame_material="Metal",
-            lens_type="Anti-glare",
-            color="Silver",
-            size="Small",
-            stock=50,
-            brand="ReadEasy"
-        )
+        self.client = Client()
+        self.url = reverse('show_main')  # Pastikan nama URL sesuai dengan nama view
 
-    def test_main_url_is_exist(self):
-        response = Client().get('')
+    def test_show_main_view_status_code(self):
+        response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
 
-    def test_main_using_main_template(self):
-        response = Client().get('')
+    def test_show_main_view_uses_correct_template(self):
+        response = self.client.get(self.url)
         self.assertTemplateUsed(response, 'main.html')
 
-    def test_nonexistent_page(self):
-        response = Client().get('/nonexistent-page/')
-        self.assertEqual(response.status_code, 404)
-
-    # def test_product_list_page(self):
-    #     response = Client().get('/shop/')
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'shop/product_list.html')
-
-    def test_product_strong_stock(self):
-        product = Product.objects.get(name="Cool Sunglasses")
-        self.assertTrue(product.stock > 10)  # Assuming that if stock is greater than 10, it's considered "strong"
-    
-    def test_product_strong_stock_low(self):
-        product = Product.objects.get(name="Classic Reading Glasses")
-        self.assertTrue(product.stock > 10)  # Assuming that if stock is greater than 10, it's considered "strong"
+    def test_show_main_view_context(self):
+        response = self.client.get(self.url)
+        self.assertContains(response, "Kacamata 1")
+        self.assertContains(response, "$100")
+        self.assertContains(response, "Polarized")
+        self.assertContains(response, "https://www.charleskeith.co.id/dw/image/v2/BCWJ_PRD/on/demandware.static/-/Sites-id-products/default/dw246086b7/images/hi-res/2024-L3-CK3-71280563-34-1.jpg?sw=756&sh=1008")
+        self.assertContains(response, "Anindhyaputri Paramitha")
+        self.assertContains(response, "PBP B")
+        self.assertContains(response, "2306218111")

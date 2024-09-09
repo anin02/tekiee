@@ -3,25 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List</title>
+    <title>Product Details</title>
+    <!-- Import Google Font: Dancing Script -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #403530; /* Mengubah background halaman */
+            margin: 0; /* Menghilangkan margin default browser */
+            padding: 0; /* Menghilangkan padding default browser */
+        }
+
+        /* Tekiee Store */
+        h1 {
+            text-align: center;
+            font-family: 'Lilita One', sans-serif;
+            color: #b98b7a;
+            margin-top: 55px;
+            font-size: 60px; /* Menambah ukuran font */
+            text-shadow: 2px 2px 4px #000000, -1px -1px 2px #000000;
+        }
+
+        /* Gaya khusus untuk kata "Store" */
+        .store {
+            color: #dac7b9; /* Mengubah warna kata Store */
+            font-family: 'Dancing Script', cursive; /* Menggunakan Google Font Dancing Script */
+            font-weight: 700; /* Membuat font tebal */
+            font-size: 85px; /* Menambah ukuran font */
+            text-shadow: 2px 2px 4px #000000, -1px -1px 2px #000000;
+        }
+
+        /* tagline */
+        .tagline {
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            color: #dac7b9;
+            font-size: 20px; /* Ukuran font untuk tagline */
+            margin-top: -30px; /* Mengatur jarak antara h1 dan tagline */
+            margin-bottom: 20px; /* Memberi jarak antara tagline dan konten berikutnya */
+        }
+
+        /* letak kotak */
+        .product-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        figure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 600px; /* Membesarkan lebar maksimal gambar */
+            border: 2px solid #b98b7a; /* Menambahkan border di sekitar kotak */
+            border-radius: 10px; /* Membuat sudut kotak membulat */
+            padding: 30px; /* Menambah padding di sekitar konten dalam kotak */
+            background-color: #fff; /* Warna latar belakang kotak */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan di bawah kotak */
+            color: #403530; /* Warna teks keterangan */
+        }
+
+        /* product image */
+        .product-container img {
+            width: 100%; /* Mengatur lebar gambar menjadi 100% dari lebar kontainer */
+            height: auto; /* Menjaga proporsi gambar */
+            border: 5px solid #fff; /* Menambahkan border putih di sekitar gambar */
+            border-radius: 15px; /* Membuat sudut gambar membulat */
+        }
+
+        /* keterangan product */
+        figcaption {
+            margin-top: 20px; /* Menambahkan jarak antara gambar dan keterangan */
+            text-align: center; /* Menengahkan teks keterangan */
+        }
+
+        /* button */
+        .buy-button {
+            margin-top: 20px; /* Jarak atas dari keterangan */
+            padding: 10px 20px; /* Padding untuk tombol */
+            background-color: #b98b7a; /* Warna latar belakang tombol */
+            color: #fff; /* Warna teks tombol */
+            border: none; /* Menghilangkan border default */
+            border-radius: 5px; /* Membuat sudut tombol membulat */
+            font-family: 'Poppins', sans-serif; /* Font tombol */
+            font-size: 16px; /* Ukuran font tombol */
+            cursor: pointer; /* Menunjukkan bahwa tombol bisa diklik */
+            text-align: center; /* Menengahkan teks di tombol */
+        }
+
+        /* tampilan button */
+        .buy-button:hover {
+            background-color: #dac7b9; /* Mengubah warna latar belakang tombol saat hover */
+            color: #403530; /* Mengubah warna teks tombol saat hover */
+        }
+
+        /* Informasi tambahan */
+        .additional-info {
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            color: #dac7b9;
+            margin-top: 30px; /* Jarak atas dari kotak produk */
+            font-size: 15px; /* Ukuran font informasi tambahan */
+        }
+    </style>
 </head>
 <body>
-    <h1>Product List</h1>
+    <h1>Tekiee<span class="store">Store</span></h1>
+    <div class="tagline">Your Eyes, Our Style</div>
     <div class="product-container">
-        {% for product in products %}
-        <div class="product-item">
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 200px; height: 200px;">
-            <h2>{{ product.name }}</h2>
-            <p><strong>Price:</strong> {{ product.price }}</p>
-            <p><strong>Description:</strong> {{ product.description }}</p>
-            <p><strong>Frame Material:</strong> {{ product.frame_material }}</p>
-            <p><strong>Lens Type:</strong> {{ product.lens_type }}</p>
-            <p><strong>Color:</strong> {{ product.color }}</p>
-            <p><strong>Size:</strong> {{ product.size }}</p>
-            <p><strong>Brand:</strong> {{ product.brand }}</p>
-            <p><strong>Stock:</strong> {{ product.stock }}</p>
-        </div>
-        {% endfor %}
+        <figure>
+            <img src="{{ image_url }}" alt="Product Image">
+            <figcaption>
+                <strong>{{ name }}</strong><br>
+                ${{ price }}<br>
+                {{ description }}
+            </figcaption>
+            <button class="buy-button">BUY</button>
+        </figure>
+    </div>
+    <div class="additional-info">
+        Nama: {{ nama }}<br>
+        Kelas: {{ kelas }}<br>
+        NPM: {{ NPM }}
     </div>
 </body>
 </html>
