@@ -9,7 +9,7 @@ class Product(models.Model):
     color = models.CharField(max_length=50, blank=True, null=True)  # Warna kacamata
     size = models.CharField(max_length=50, blank=True, null=True)  # Ukuran kacamata
     stock = models.IntegerField(default=0)  # Jumlah stok
-    # image = models.ImageField(upload_to='products/', blank=True, null=True)  # Gambar kacamata
+    image = models.ImageField(upload_to='products/', blank=True, null=True)  # Gambar kacamata
     brand = models.CharField(max_length=255, blank=True, null=True)  # Merek kacamata
 
     @property
