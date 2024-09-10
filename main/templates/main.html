@@ -52,14 +52,15 @@
             margin-top: 50px;
         }
 
+        /* ukuran kotak */
         figure {
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: 600px; /* Membesarkan lebar maksimal gambar */
+            max-width: 200px; /* Mengurangi lebar maksimal kotak */
             border: 2px solid #b98b7a; /* Menambahkan border di sekitar kotak */
             border-radius: 10px; /* Membuat sudut kotak membulat */
-            padding: 30px; /* Menambah padding di sekitar konten dalam kotak */
+            padding: 20px; /* Mengurangi padding di sekitar konten dalam kotak */
             background-color: #fff; /* Warna latar belakang kotak */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan di bawah kotak */
             color: #403530; /* Warna teks keterangan */
@@ -67,7 +68,8 @@
 
         /* product image */
         .product-container img {
-            width: 100%; /* Mengatur lebar gambar menjadi 100% dari lebar kontainer */
+            width: 95%; /* Mengatur lebar gambar menjadi 80% dari lebar kontainer */
+            max-width: 350px; /* Membatasi lebar maksimal gambar */
             height: auto; /* Menjaga proporsi gambar */
             border: 5px solid #fff; /* Menambahkan border putih di sekitar gambar */
             border-radius: 15px; /* Membuat sudut gambar membulat */
@@ -124,9 +126,11 @@
         </figure>
     </div>
     <div class="additional-info">
-        Nama: {{ nama }}<br>
-        Kelas: {{ kelas }}<br>
-        NPM: {{ NPM }}
+        ========================<br>
+        Nama : {{ nama }}<br>
+        Kelas : {{ kelas }}<br>
+        NPM : {{ NPM }}<br>
+        ========================
     </div>
 </body>
 </html>
