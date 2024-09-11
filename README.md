@@ -6,6 +6,7 @@ Kelas : PBP B
 
 e-commerce : menjual berbagai jenis kacamata
 
+http://anindhyaputri-paramitha-tekiee.pbp.cs.ui.ac.id/
 
 I. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
@@ -124,7 +125,7 @@ IV. Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadi
 
 Django sering dijadikan permulaan dalam pembelajaran pengembangan perangkat lunak karena beberapa alasan utama. Pertama, Django adalah framework yang bersifat *full-stack*, artinya Django sudah menyediakan berbagai fitur penting yang dibutuhkan dalam membangun aplikasi web, seperti manajemen database, routing URL, dan autentikasi, tanpa perlu banyak pengaturan tambahan. Hal ini memudahkan pemula untuk fokus belajar konsep-konsep inti dalam pengembangan web tanpa harus memikirkan terlalu banyak alat atau library eksternal.
 
-Selain itu, Django menggunakan bahasa Python, yang terkenal mudah dipahami karena sintaksnya yang sederhana dan jelas. Python juga sering menjadi bahasa pertama yang dipelajari oleh banyak orang yang baru mulai belajar pemrograman, sehingga menggunakan Django sebagai framework selanjutnya terasa alami. Django juga memiliki dokumentasi yang sangat lengkap, yang memudahkan pemula untuk mengikuti langkah-langkah pembangunan aplikasi dari awal hingga akhir.
+Selain itu, Django menggunakan bahasa Python, yang terkenal mudah dipahami karena sintaksnya yang sederhana dan jelas. Python juga sering menjadi bahasa pertama yang dipelajari oleh banyak orang yang baru mulai belajar pemrograman, sehingga menggunakan Django sebagai framework selanjutnya terasa lebih mudah. Django juga memiliki dokumentasi yang sangat lengkap, yang memudahkan pemula untuk mengikuti langkah-langkah pembangunan aplikasi dari awal hingga akhir.
 
 Terakhir, Django mendorong praktik pengembangan yang baik, seperti penggunaan *models-view-template* (MVT), yang mengajarkan bagaimana memisahkan logika bisnis, tampilan, dan data secara rapi. Dengan begitu, Django menjadi pilihan tepat untuk memulai pembelajaran karena memudahkan pemahaman konsep, memberikan alat yang lengkap, dan membantu membangun kebiasaan kode yang terstruktur.
 
