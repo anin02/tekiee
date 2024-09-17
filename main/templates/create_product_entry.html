@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Add New Product{% endblock title %}
+
+{% block content %}
+  <h1 class="form-title">Add New Product</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+    <table class="product-form-table">
+      <tr>
+        <td><label for="id_name">Nama :</label></td>
+        <td><input type="text" id="id_name" name="name" required /></td>
+      </tr>
+      <tr>
+        <td><label for="id_price">Price :</label></td>
+        <td><input type="text" id="id_price" name="price" required /></td>
+      </tr>
+      <tr>
+        <td><label for="id_description">Description :</label></td>
+        <td><textarea id="id_description" name="description" rows="4" required></textarea></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <input type="submit" value="Add Product" class="submit-button" />
+        </td>
+      </tr>
+    </table>
+  </form>
+{% endblock %}
+
+{% block meta %}
+  <style>
+    .product-form-table {
+      width: 50%;
+      margin: 0 auto;
+      border-collapse: separate;
+      border-spacing: 10px; /* Add space between cells */
+    }
+
+    .product-form-table td {
+      padding: 10px;
+      vertical-align: top;
+    }
+
+    .product-form-table label {
+      display: block;
+      font-family: 'Lilita One', sans-serif;
+      color: #dac7b9;
+      font-size: 24px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .product-form-table input[type="text"],
+    .product-form-table textarea {
+      width: calc(100% - 20px); /* Reduce width to avoid full width */
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #b98b7a;
+    }
+
+    .submit-button {
+      padding: 10px 20px;
+      background-color: #b98b7a;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+      display: block;
+      margin: 20px auto;
+    }
+
+    .submit-button:hover {
+      background-color: #dac7b9;
+      color: #403530;
+    }
+
+    .form-title {
+      color: #dac7b9;
+      text-align: center;
+      font-family: 'Lilita One', sans-serif;
+      margin-bottom: 50px;
+      margin-top: 50px;
+    }
+  </style>
+{% endblock meta %}

@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Tekiee Store{% endblock title %}</title>
+    {% block meta %} {% endblock meta %}
+    <style>
+      body {
+        background-color: #403530; /* Background color for the page */
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
+      }
+    </style>
+  </head>
+  <body>
+    {% block content %} {% endblock content %}
+  </body>
+</html>

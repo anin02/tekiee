@@ -1,136 +1,140 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details</title>
-    <!-- Import Google Font: Dancing Script -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: #403530; /* Mengubah background halaman */
-            margin: 0; /* Menghilangkan margin default browser */
-            padding: 0; /* Menghilangkan padding default browser */
-        }
+{% extends "base.html" %}
 
-        /* Tekiee Store */
-        h1 {
-            text-align: center;
-            font-family: 'Lilita One', sans-serif;
-            color: #b98b7a;
-            margin-top: 55px;
-            font-size: 60px; /* Menambah ukuran font */
-            text-shadow: 2px 2px 4px #000000, -1px -1px 2px #000000;
-        }
+{% block title %}Tekiee Store{% endblock title %}
 
-        /* Gaya khusus untuk kata "Store" */
-        .store {
-            color: #dac7b9; /* Mengubah warna kata Store */
-            font-family: 'Dancing Script', cursive; /* Menggunakan Google Font Dancing Script */
-            font-weight: 700; /* Membuat font tebal */
-            font-size: 85px; /* Menambah ukuran font */
-            text-shadow: 2px 2px 4px #000000, -1px -1px 2px #000000;
-        }
-
-        /* tagline */
-        .tagline {
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-            color: #dac7b9;
-            font-size: 20px; /* Ukuran font untuk tagline */
-            margin-top: -30px; /* Mengatur jarak antara h1 dan tagline */
-            margin-bottom: 20px; /* Memberi jarak antara tagline dan konten berikutnya */
-        }
-
-        /* letak kotak */
-        .product-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
-        }
-
-        /* ukuran kotak */
-        figure {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 200px; /* Mengurangi lebar maksimal kotak */
-            border: 2px solid #b98b7a; /* Menambahkan border di sekitar kotak */
-            border-radius: 10px; /* Membuat sudut kotak membulat */
-            padding: 20px; /* Mengurangi padding di sekitar konten dalam kotak */
-            background-color: #fff; /* Warna latar belakang kotak */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan di bawah kotak */
-            color: #403530; /* Warna teks keterangan */
-        }
-
-        /* product image */
-        .product-container img {
-            width: 95%; /* Mengatur lebar gambar menjadi 80% dari lebar kontainer */
-            max-width: 350px; /* Membatasi lebar maksimal gambar */
-            height: auto; /* Menjaga proporsi gambar */
-            border: 5px solid #fff; /* Menambahkan border putih di sekitar gambar */
-            border-radius: 15px; /* Membuat sudut gambar membulat */
-        }
-
-        /* keterangan product */
-        figcaption {
-            margin-top: 20px; /* Menambahkan jarak antara gambar dan keterangan */
-            text-align: center; /* Menengahkan teks keterangan */
-        }
-
-        /* button */
-        .buy-button {
-            margin-top: 20px; /* Jarak atas dari keterangan */
-            padding: 10px 20px; /* Padding untuk tombol */
-            background-color: #b98b7a; /* Warna latar belakang tombol */
-            color: #fff; /* Warna teks tombol */
-            border: none; /* Menghilangkan border default */
-            border-radius: 5px; /* Membuat sudut tombol membulat */
-            font-family: 'Poppins', sans-serif; /* Font tombol */
-            font-size: 16px; /* Ukuran font tombol */
-            cursor: pointer; /* Menunjukkan bahwa tombol bisa diklik */
-            text-align: center; /* Menengahkan teks di tombol */
-        }
-
-        /* tampilan button */
-        .buy-button:hover {
-            background-color: #dac7b9; /* Mengubah warna latar belakang tombol saat hover */
-            color: #403530; /* Mengubah warna teks tombol saat hover */
-        }
-
-        /* Informasi tambahan */
-        .additional-info {
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-            color: #dac7b9;
-            margin-top: 30px; /* Jarak atas dari kotak produk */
-            font-size: 15px; /* Ukuran font informasi tambahan */
-        }
-    </style>
-</head>
-<body>
+{% block content %}
+  <div class="container">
     <h1>Tekiee<span class="store">Store</span></h1>
     <div class="tagline">Your Eyes, Our Style</div>
-    <div class="product-container">
-        <figure>
-            <img src="{{ image_url }}" alt="Product Image">
-            <figcaption>
-                <strong>{{ name }}</strong><br>
-                ${{ price }}<br>
-                {{ description }}
-            </figcaption>
-            <button class="buy-button">BUY</button>
-        </figure>
+
+    <div class="button-container">
+      <a href="{% url 'main:create_product_entry' %}">
+        <button>Add New Product</button>
+      </a>
     </div>
+
+    {% if not product_entries %}
+      <p style="color: #dac7b9;">No products available in the Tekiee Store.</p>
+    {% else %}
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in product_entries %}
+            <tr>
+              <td>{{ product.name }}</td>
+              <td>${{ product.price }}</td>
+              <td>{{ product.description }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
     <div class="additional-info">
-        ========================<br>
-        Nama : {{ nama }}<br>
-        Kelas : {{ kelas }}<br>
-        NPM : {{ NPM }}<br>
-        ========================
+      =============================<br>
+      Nama : {{ name }}<br>
+      Kelas : {{ class }}<br>
+      NPM : {{ npm }}<br>
+      =============================
     </div>
-</body>
-</html>
+  </div>
+{% endblock content %}
+
+{% block meta %}
+  <style>
+    h1 {
+      text-align: center;
+      font-family: 'Lilita One', sans-serif;
+      color: #b98b7a;
+      margin-top: 15px;
+      font-size: 60px; /* Font size */
+      text-shadow: 2px 2px 4px #000000, -1px -1px 2px #000000;
+    }
+
+    .store {
+      color: #dac7b9; /* Color for the word "Store" */
+      font-family: 'Dancing Script', cursive; /* Font style for "Store" */
+      font-weight: 700;
+      font-size: 85px; /* Font size for "Store" */
+      text-shadow: 2px 2px 4px #000000, -1px -1px 2px #000000;
+    }
+
+    .tagline {
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      color: #dac7b9;
+      font-size: 20px;
+      margin-top: -30px;
+      margin-bottom: 45px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+    .button-container {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .button-container button {
+      padding: 10px 20px;
+      background-color: #b98b7a;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .button-container button:hover {
+      background-color: #dac7b9;
+      color: #403530;
+    }
+
+    .product-table {
+      width: 80%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .product-table th, .product-table td {
+      border: 1px solid #b98b7a;
+      padding: 10px;
+      text-align: center;
+      color: #403530;
+    }
+
+    .product-table th {
+      background-color: #dac7b9;
+      color: #403530;
+    }
+
+    .product-table td {
+      background-color: #fff;
+    }
+
+    .additional-info {
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      color: #dac7b9;
+      margin-top: 45px;
+      margin-bottom: 45px;
+      font-size: 15px;
+    }
+  </style>
+{% endblock meta %}
