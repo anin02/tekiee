@@ -4,7 +4,7 @@ NPM : 2306218111
 
 Kelas : PBP B
 
-e-commerce : menjual berbagai jenis kacamata
+e-commerce : tekiee (menjual berbagai jenis kacamata)
 
 http://anindhyaputri-paramitha-tekiee.pbp.cs.ui.ac.id/
 
