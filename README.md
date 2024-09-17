@@ -8,6 +8,10 @@ e-commerce : tekiee (menjual berbagai jenis kacamata)
 
 http://anindhyaputri-paramitha-tekiee.pbp.cs.ui.ac.id/
 
+
+
+### TUGAS 2
+
 I. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
 ### Inisiasi Direktori Lokal dan GitHub
@@ -137,3 +141,90 @@ V. Mengapa model pada Django disebut sebagai ORM?
 Model pada Django disebut sebagai ORM (Object-Relational Mapping) karena berfungsi sebagai jembatan antara objek dalam kode Python dengan tabel-tabel di database relasional. ORM memungkinkan pengembang untuk berinteraksi dengan database menggunakan konsep objek, tanpa perlu menulis perintah SQL secara langsung. Dengan ORM, setiap model dalam Django merepresentasikan sebuah tabel di database, dan atribut-atribut model tersebut menjadi kolom-kolom dalam tabel.
 
 Misalnya, jika membuat model bernama `Product` dengan atribut `name`, `price`, dan `description`, Django secara otomatis mengubahnya menjadi tabel `Product` di database dengan kolom-kolom yang sesuai. ORM ini memudahkan pengelolaan data dalam aplikasi karena pengembang hanya perlu menggunakan kode Python untuk membuat, membaca, memperbarui, dan menghapus data. Ini membuat pengembangan lebih cepat dan mudah, serta mengurangi kemungkinan kesalahan dalam penulisan SQL.
+
+
+
+
+
+
+
+
+
+### TUGAS 3
+
+### Screenshot Postman
+![alt text](XML_POSTMAN.png)
+![alt text](JSON_POSTMAN.png)
+![alt text](XML_ID_POSTMAN.png)
+![alt text](JSON_ID_POSTMAN.png)
+
+
+
+
+### 1. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+
+Data delivery penting karena ia memastikan data bisa dikirim dan diterima dengan baik antara server dan pengguna. Ini termasuk informasi yang dibutuhkan untuk menjalankan aplikasi, seperti data dari pengguna atau hasil pencarian. Jika data delivery tidak berfungsi dengan baik, aplikasi bisa lambat, mengalami kesalahan, atau bahkan tidak dapat mengirimkan informasi yang benar. Jadi, data delivery yang efektif membantu aplikasi bekerja dengan lancar dan memberikan pengalaman pengguna yang baik.
+
+
+
+
+### 2. Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+
+JSON umumnya dianggap lebih baik daripada XML untuk aplikasi web karena beberapa alasan utama. Pertama, JSON lebih ringkas dan sederhana dibandingkan XML, sehingga lebih mudah dibaca dan dipahami. Kedua, JSON mudah digunakan dalam berbagai bahasa pemrograman, terutama JavaScript, yang sering digunakan dalam pengembangan web. Ketiga, JSON sering lebih efisien, dengan sintaks yang lebih ringkas dan struktur yang lebih sederhana, JSON sering kali lebih cepat dalam hal kecepatan pemrosesan dan lebih hemat ruang penyimpanan. Karena kemudahan dan efisiensinya, JSON menjadi pilihan utama dalam banyak aplikasi web dan API.
+
+JSON lebih populer karena kemudahan dan efisiensinya, yang membuatnya pilihan utama dalam banyak aplikasi web dan API.
+
+
+
+
+### 3. Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+
+Method `is_valid()` di Django digunakan untuk memastikan bahwa data yang dimasukkan ke dalam form sudah benar dan sesuai dengan aturan yang ditetapkan. Fungsi utama dari method ini adalah memeriksa setiap input data untuk memastikan bahwa data tersebut memenuhi semua kriteria validasi yang telah ditentukan, seperti format yang benar, panjang data yang sesuai, dan tidak adanya kesalahan lain. Dengan memanggil `is_valid()`, kita bisa memastikan bahwa hanya data yang valid dan sesuai yang diterima oleh aplikasi, sehingga mengurangi risiko kesalahan atau masalah yang bisa terjadi akibat data yang tidak benar. Method ini sangat penting karena membantu menjaga integritas data yang masuk ke aplikasi, memastikan bahwa aplikasi berfungsi dengan baik dan memberikan pengalaman pengguna yang lebih baik.
+
+
+
+
+### 4. Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+
+CSRF token (Cross-Site Request Forgery token) adalah fitur keamanan yang melindungi aplikasi web dari serangan yang bisa membahayakan pengguna. Bayangkan jika penyerang bisa membuat pengguna yang sedang login di sebuah situs web mengirimkan permintaan berbahaya tanpa mereka sadari, misalnya mengubah pengaturan akun mereka atau mengirimkan data yang tidak diinginkan. Tanpa CSRF token, aplikasi web tidak bisa membedakan apakah permintaan yang masuk berasal dari pengguna yang sah atau dari penyerang yang mencoba memanipulasi pengguna. Ini bisa menyebabkan masalah serius, seperti data yang salah atau kerusakan pada sistem.
+
+CSRF token bekerja dengan cara memberikan setiap formulir atau permintaan yang dikirim dengan token unik yang hanya diketahui oleh aplikasi dan pengguna saat itu. Saat formulir dikirimkan, token ini juga dikirim bersama data lainnya. Aplikasi kemudian memeriksa token tersebut untuk memastikan permintaan itu benar-benar datang dari pengguna yang sah. Jika token tidak cocok atau tidak ada, permintaan ditolak. Ini membantu memastikan bahwa semua permintaan yang masuk adalah hasil dari tindakan yang sah dan menghindari serangan dari pihak yang tidak berwenang.
+
+
+
+
+### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+### Implementasi Skeleton sebagai Kerangka Views
+1. Buat Direktori templates: Di root folder proyek, buat direktori templates.
+2. Buat Berkas base.html: Di dalam templates, buat berkas base.html dengan kode skeleton.
+3. Sesuaikan Konfigurasi TEMPLATES di settings.py: Tambahkan BASE_DIR / 'templates' ke dalam DIRS dan pastikan APP_DIRS bernilai True.
+4. Modifikasi Berkas main.html: Ubah berkas main.html di main/templates/ untuk me-extend base.html.
+
+### Mengubah Primary Key Dari Integer Menjadi UUID
+1. Hapus Berkas Basis Data: Jika objek sudah ada, hapus berkas db.sqlite3 untuk menghindari error.
+2. Modifikasi models.py: Tambahkan import uuid di bagian atas dan ubah ID di model menjadi UUIDField dengan default=uuid.uuid4.
+3. Jalankan Migrasi Model: jalankan python3 manage.py makemigrations dan python3 manage.py migrate.
+
+### Membuat Form Input Data dan Menampilkan Data Mood Entry Pada HTML
+1. Buat `forms.py`: Tambahkan `ProductForm` di `forms.py` untuk form data `Product`.
+2. Modifikasi `views.py`: Tambahkan import dan fungsi `create_product_entry` untuk menangani input data dari form.
+3. Update `show_main` di `views.py`: Modifikasi untuk menampilkan data `Product` di halaman utama.
+4. Update `urls.py`: Tambahkan path URL untuk `create_product_entry`.
+5. Buat `create_product_entry.html`: Buat template HTML untuk form input data `Product`.
+6. Update `main.html`: Tambahkan kode untuk menampilkan data product dalam tabel dan tombol "Add New Product".
+7. Jalankan Server**: Gunakan `python manage.py runserver` dan akses aplikasi di browser.
+
+### Mengembalikan Data dalam Bentuk XML, JSON, XML berdasarkan id, JSON, berdasarkan id
+1. Untuk XML:
+   - Tambahkan import `HttpResponse` dan `serializers` di `views.py`.
+   - Buat fungsi `show_xml` untuk mengembalikan data `Product` dalam format XML.
+   - Tambahkan path URL `xml/` di `urls.py`.
+2. Untuk JSON:
+   - Buat fungsi `show_json` di `views.py` untuk mengembalikan data `Product` dalam format JSON.
+   - Tambahkan path URL `json/` di `urls.py`.
+3. Data Berdasarkan ID:
+   - Buat fungsi `show_xml_by_id` dan `show_json_by_id` di `views.py` untuk mengembalikan data berdasarkan ID dalam format XML dan JSON.
+   - Tambahkan path URL `xml/<str:id>/` dan `json/<str:id>/` di `urls.py`.
+4. Jalankan Server:
+   - Gunakan `python manage.py runserver` dan akses URL di browser sesuai dengan path yang telah ditambahkan.
