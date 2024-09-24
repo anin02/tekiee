@@ -11,7 +11,12 @@
       <a href="{% url 'main:create_product_entry' %}">
         <button>Add New Product</button>
       </a>
+      <a href="{% url 'main:logout' %}">
+        <button>Logout</button>
+      </a>
+      <h5>Sesi terakhir login: {{ last_login }}</h5>
     </div>
+
 
     {% if not product_entries %}
       <p style="color: #dac7b9;">No products available in the Tekiee Store.</p>
