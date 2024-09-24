@@ -39,7 +39,7 @@ def show_main(request):
 
     # Membuat konteks untuk template
     context = {
-        'name': 'Anindhyaputri Paramitha',  # Nama pemilik
+        'name': request.user.username,  # Nama pemilik
         'class': 'PBP B',  # Kelas
         'npm': '2306218111',  # NPM
         'product_entries': product_entries,  # Semua produk yang diambil dari database
