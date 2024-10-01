@@ -1,145 +1,47 @@
-{% extends "base.html" %}
-
-{% block title %}Tekiee Store{% endblock title %}
-
-{% block content %}
-  <div class="container">
-    <h1>Tekiee<span class="store">Store</span></h1>
-    <div class="tagline">Your Eyes, Our Style</div>
-
-    <div class="button-container">
-      <a href="{% url 'main:create_product_entry' %}">
-        <button>Add New Product</button>
-      </a>
-      <a href="{% url 'main:logout' %}">
-        <button>Logout</button>
-      </a>
-      <h5>Sesi terakhir login: {{ last_login }}</h5>
-    </div>
-
-
-    {% if not product_entries %}
-      <p style="color: #dac7b9;">No products available in the Tekiee Store.</p>
-    {% else %}
-      <table class="product-table">
-        <thead>
-          <tr>
-            <th>Product Name</th>
-            <th>Price</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for product in product_entries %}
-            <tr>
-              <td>{{ product.name }}</td>
-              <td>${{ product.price }}</td>
-              <td>{{ product.description }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    {% endif %}
-
-    <div class="additional-info">
-      =============================<br>
-      Nama : {{ name }}<br>
-      Kelas : {{ class }}<br>
-      NPM : {{ npm }}<br>
-      =============================
-    </div>
-  </div>
-{% endblock content %}
+{% extends 'base.html' %}
+{% load static %}
 
 {% block meta %}
-  <style>
-    h1 {
-      text-align: center;
-      font-family: 'Lilita One', sans-serif;
-      color: #b98b7a;
-      margin-top: 15px;
-      font-size: 60px; /* Font size */
-      text-shadow: 2px 2px 4px #000000, -1px -1px 2px #000000;
-    }
-
-    .store {
-      color: #dac7b9; /* Color for the word "Store" */
-      font-family: 'Dancing Script', cursive; /* Font style for "Store" */
-      font-weight: 700;
-      font-size: 85px; /* Font size for "Store" */
-      text-shadow: 2px 2px 4px #000000, -1px -1px 2px #000000;
-    }
-
-    .tagline {
-      text-align: center;
-      font-family: 'Poppins', sans-serif;
-      color: #dac7b9;
-      font-size: 20px;
-      margin-top: -30px;
-      margin-bottom: 45px;
-    }
-
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 50px;
-    }
-
-    .button-container {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .button-container button {
-      padding: 10px 20px;
-      background-color: #b98b7a;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 16px;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .button-container button:hover {
-      background-color: #dac7b9;
-      color: #403530;
-    }
-
-    .product-table {
-      width: 80%;
-      margin: 0 auto;
-      border-collapse: collapse;
-      background-color: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .product-table th, .product-table td {
-      border: 1px solid #b98b7a;
-      padding: 10px;
-      text-align: center;
-      color: #403530;
-    }
-
-    .product-table th {
-      background-color: #dac7b9;
-      color: #403530;
-    }
-
-    .product-table td {
-      background-color: #fff;
-    }
-
-    .additional-info {
-      text-align: center;
-      font-family: 'Poppins', sans-serif;
-      color: #dac7b9;
-      margin-top: 45px;
-      margin-bottom: 45px;
-      font-size: 15px;
-    }
-  </style>
+<title>Tekiee Store</title>
 {% endblock meta %}
+
+{% block content %}
+{% include 'navbar.html' %}
+<div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-100 bg-[#FFEBCD] flex flex-col">
+  <h1 class="tagline text-center mb-4" style="text-align: center; font-family: 'Lilita One'; color: #784935; margin-top: 15px; font-size: 85px;">Tekiee<span class="tagline text-center mb-4" style="color: #786e67; font-family: 'Dancing Script', cursive; font-weight: 700; font-size: 95px;">Store</span></h1>
+  <div class="tagline text-center mb-10" style="font-family: 'Poppins', sans-serif; color: #000000; font-size: 25px;">Your Eyes, Our Style</div>
+
+
+
+  <div class="relative grid grid-cols-1 z-30 md:grid-cols-3 gap-8">
+    {% include "card_info.html" with title='NPM' value=npm %}
+    {% include "card_info.html" with title='Name' value=name %}
+    {% include "card_info.html" with title='Class' value=class %}
+  </div>
+
+  <div class="flex justify-center mb-12 mt-7">
+    <div class="flex rounded-md items-center bg-600 bg-[#403530] font-bold py-2 px-4 w-fit">
+      <h1 class="text-[#FFEBCD] text-center">Last Login: {{last_login}}</h1>
+    </div>
+  </div>
+  
+  <div class="flex justify-center mb-9">
+    <a href="{% url 'main:create_product_entry' %}" class=" bg-600 bg-[#403530] text-[#FFEBCD] font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+      Add New Product
+    </a>
+  </div>
+  
+  {% if not product_entries %}
+  <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+      <img src="{% static 'image/sedih-banget.png' %}" alt="Sad face" class="w-32 h-32 mb-4"/>
+      <p class="text-center text-gray-600 mt-4">Belum ada produk di Tekiee Store.</p>
+  </div>
+  {% else %}
+  <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 w-full">
+      {% for product in product_entries %}
+          {% include 'card_product.html' with product=product %}
+      {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock content %}

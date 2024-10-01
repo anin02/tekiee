@@ -18,3 +18,12 @@ class Product(models.Model):
     @property
     def __str__(self):
         return self.name
+    
+class Person(models.Model):
+    nama_orang = models.CharField(max_length=255)  
+    umur = models.IntegerField()  
+    ishappy = models.BooleanField()
+
+    @property
+    def __str__(self):
+        return self.nama_orang

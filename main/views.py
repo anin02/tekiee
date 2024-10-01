@@ -12,6 +12,8 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.shortcuts import reverse
+from django.http import HttpResponseRedirect
 
 # Fungsi untuk membuat produk baru
 def create_product_entry(request):
@@ -98,3 +100,30 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def edit_product(request, id):
+    # Dapatkan produk berdasarkan id
+    product = Product.objects.get(pk=id, user=request.user)  # Hanya produk milik user yang sedang login
+
+    # Inisialisasi form dengan data POST atau produk yang sudah ada
+    form = ProductForm(request.POST or None, instance=product)
+
+    # Jika form valid dan metode request adalah POST
+    if form.is_valid() and request.method == "POST":
+        # Simpan perubahan produk
+        form.save()
+        # Redirect ke halaman utama setelah berhasil menyimpan perubahan
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    # Buat konteks untuk template dengan form
+    context = {'form': form}
+    # Render halaman edit_product.html dengan form
+    return render(request, "edit_product.html", context)
+
+def delete_product(request, id):
+    # Ambil produk berdasarkan id
+    product = Product.objects.get(pk=id)
+    # Hapus produk
+    product.delete()
+    # Kembali ke halaman utama
+    return HttpResponseRedirect(reverse('main:show_main'))
