@@ -370,3 +370,112 @@ V. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara ste
 9. Kemudian saya ubah value product_entries agar aplikasi hanya menambilkan objek Product yang terasosiakan dengan pengguna yang sedang login dan modifikasi pada context yaitu 'name': request.user.username, untuk menampilakn nama user yang sedang logged in.
 10. Setelah itu, saya makemigrations dan migratesesuai dengan langkah yang ada pada tutorial.
 11. Terakhir, saya buka settings.py untuk import os dan mengubah variabel DEBUG menjadi PRODUCTION = os.getenv("PRODUCTION", False) DEBUG = not PRODUCTION
+
+
+
+
+
+
+
+
+
+
+
+### TUGAS 5
+
+1. Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+
+Dalam pengembangan web, terdapat konsep yang dikenal sebagai CSS specificity. Ada beberapa cara untuk menghitung CSS specificity, baik dengan menggunakan selector maupun sistem angka desimal. Berikut adalah urutan prioritas selector CSS dari yang tertinggi hingga terendah:
+
+- !important rule: Aturan ini memiliki prioritas tertinggi dan akan mengesampingkan semua aturan lainnya, termasuk inline style.
+- Inline Style: Gaya yang diterapkan langsung pada elemen HTML melalui atribut style memiliki prioritas lebih tinggi daripada semua selector CSS lainnya.
+- ID Selector (#): Selector ini diterapkan pada elemen yang memiliki atribut id.
+- Pseudo-Class Selector (:). Selector ini diaplikasikan pada elemen dalam kondisi spesifik seperti :hover, :active, :nth-child()
+- Attribute Selector ([]): Selector ini berdasarkan pada atribut yang terdapat dalam elemen HTML, contohnya [type="text"] atau [href].
+- Class Selector (.): Selector ini menargetkan elemen yang memiliki atribut class dan memiliki prioritas lebih tinggi dibandingkan selector elemen.
+- Element Type Selector: Selector ini mengacu pada tag HTML seperti div, p, h1, dan sebagainya.
+- Universal Selector (*): Selector ini menargetkan semua elemen tanpa pengecualian.
+
+
+
+
+2. Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+
+Desain responsif telah menjadi konsep penting dalam pengembangan aplikasi web karena beberapa alasan berikut:
+
+- Pengalaman Pengguna yang Lebih Baik: Pengalaman pengguna yang baik sangat penting, terutama jika aplikasi web digunakan untuk pemasaran. Dengan desain yang responsif, tampilan aplikasi dapat disesuaikan di berbagai perangkat, sehingga meningkatkan pengalaman pengguna dan reputasi merek.
+
+- Perawatan yang Lebih Mudah: Dulu, pengembang harus membuat versi berbeda untuk setiap jenis perangkat. Namun, dengan desain responsif, satu situs dapat menyesuaikan tampilannya di semua perangkat, sehingga lebih mudah untuk dikelola.
+
+- Waktu Muat yang Lebih Cepat: Sekitar 53% pengguna akan meninggalkan situs jika memuat lebih dari tiga detik. Desain responsif hanya memuat sumber daya yang diperlukan, sehingga situs dapat dimuat lebih cepat tanpa harus mengalihkan pengguna ke versi yang berbeda.
+
+- Beragam Perangkat Saat Ini: Saat ini, aplikasi web diakses melalui berbagai perangkat, seperti ponsel, laptop, dan TV. Oleh karena itu, penting untuk memiliki desain responsif agar pengguna merasa nyaman saat mengakses aplikasi web.
+
+Contoh aplikasi yang sudah menerapkan desain responsif: Tokopedia.
+Contoh aplikasi yang belum menerapkan desain responsif: SIAKng.
+
+
+
+
+3. Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+
+Berikut adalah penjelasan dan contohnya masing - masing:
+
+- Padding adalah ruang antara konten dan border, yang merupakan komponen berikutnya dari box. Kita bisa mengatur padding di setiap sisi. Contoh implementasinya adalah:
+div {
+    padding: 20px; /* Semua sisi akan diberi padding 20px */
+    padding-top: 10px; /* Padding hanya pada bagian atas */
+    padding-right: 15px; /* Padding hanya pada bagian kanan */
+    padding-bottom: 10px; /* Padding hanya pada bagian bawah */
+    padding-left: 15px; /* Padding hanya pada bagian kiri */
+}
+
+- Border adalah garis yang terlihat atau tidak terlihat di sekitar tepi box. Kita bisa mengatur ketebalannya, jenis border, dan warna border
+div {
+    border: 2px solid black; /* Border 2px tebal, jenis solid, warna hitam */
+    border-top: 3px dashed red; /* Border atas saja dengan garis putus-putus merah */
+}
+
+- Margin adalah ruang luar di sekitar box yang mengatur jarak antara elemen dengan elemen lainnya.
+div {
+    margin: 20px; /* Semua sisi diberi margin 20px */
+    margin-top: 10px; /* Margin hanya di bagian atas */
+    margin-right: 15px; /* Margin hanya di bagian kanan */
+    margin-bottom: 10px; /* Margin hanya di bagian bawah */
+    margin-left: 15px; /* Margin hanya di bagian kiri */
+}
+
+- Untuk implementasi ketiga nya dalam satu class:
+    <style>
+        .box {
+            margin: 30px;            
+            padding: 20px;            
+            border: 5px solid blue;   
+            background-color: lightgray; 
+        }
+    </style>
+
+
+
+
+4. Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+
+CSS Flexbox adalah metode tata letak satu dimensi yang berguna untuk mengatur dan menyelaraskan ruang antara item dalam sebuah kontainer grid. Flexbox dirancang agar dapat bekerja dengan berbagai jenis perangkat dan ukuran layar. Metode ini membuat desain dan pembuatan halaman web responsif menjadi lebih mudah, tanpa perlu banyak menggunakan properti float dan position dalam kode CSS.
+
+Sementara itu, CSS Grid Layout adalah sistem tata letak dua dimensi yang menggunakan baris dan kolom. Metode ini sangat membantu untuk menciptakan tata letak yang lebih kompleks dan teratur.
+
+
+
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+- Pertama, saya menambahkan tailwind ke aplikasi dengan memodifikasi file base.html dengan menambahkan tag <meta name="viewport"> dan <script src="https://cdn.tailwindcss.com">
+- Setelah itu, saya menambahkan fitur Edit Product pada aplikasi. Saya mulai dengan modifikasi file views.py dan membuat fungsi baru bernama edit_product yang menerima parameter request dan id. Setelah itu, saya menambahkan import reverse dan HttpResponseRedirect.
+- Kemudian, saya membuat file html baru yang dinamakan edit_product.html. Isi dari file ini dapat mengedit inputan dari form sebelumnya dengan struktur design / tampilan yang sama dengan create_product_entry.html. Setelah itu saya menambahkan path url pada urls.py.
+- Setelah itu, saya menambahkan fitur hapus product pada aplikasi. Dengan cara menambahkan fungsi baru pada views.py seperti yang ada di tutorial dan melakukan path url yang baru.
+- Saya kemudian menambahkan navigation bar pada aplikasi dengan membuat file html baru dinamakan navbar.html dengan text "Tekiee, "hello {{nama}}", dan log out button.
+- Setelah membuat navbar.html, edit product, dan delete product, saya konfigurasi static files pada aplikasi dengan memodifikasi settings.py dan menambahkan 'whitenoise.middleware.WhiteNoiseMiddleware' pada bagian MIDDLEWARE. Saya juga mengubah bagian STATIC_ROOT, TATICFILES_DIRS, dan STATIC_URL.
+- Saya juga menambahkan global.css pada folder static/css yang berisi design css saya. Kemudian saya mengubah base.html agar style global.css dapat digunakan di Django.
+- Lalu saya memodifikasi file login.html, register.html, create_product_entry menjadi styling tailwind. Untuk login.html saya menampilkan static image bernama sedih-banget.png yang akan ditampilkan sebelah login entry.
+- Saya juga membuat file card_product.html yang akan menampilkan card baru untuk setiap product entry baru. Dan di dalam nya ada button untuk edit product dan delete product.
+- Setelah menyelesaikan segala berkas html di template, saya akhirnya memodifikasi main.html agar segala berkas html lainnya dapat terintegrasi dengan baik.
