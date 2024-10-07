@@ -536,8 +536,6 @@ Data dari Layanan Eksternal: Jika view kita menerima data dari layanan eksternal
 Contoh penggunaannya dalam kode:
 
 ```
-python
-Salin kode
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
