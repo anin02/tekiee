@@ -206,7 +206,7 @@ CSRF token bekerja dengan cara memberikan setiap formulir atau permintaan yang d
 2. Modifikasi models.py: Tambahkan import uuid di bagian atas dan ubah ID di model menjadi UUIDField dengan default=uuid.uuid4.
 3. Jalankan Migrasi Model: jalankan python3 manage.py makemigrations dan python3 manage.py migrate.
 
-### Membuat Form Input Data dan Menampilkan Data Mood Entry Pada HTML
+### Membuat Form Input Data dan Menampilkan Data Product Entry Pada HTML
 1. Buat `forms.py`: Tambahkan `ProductForm` di `forms.py` untuk form data `Product`.
 2. Modifikasi `views.py`: Tambahkan import dan fungsi `create_product_entry` untuk menangani input data dari form.
 3. Update `show_main` di `views.py`: Modifikasi untuk menampilkan data `Product` di halaman utama.
@@ -264,13 +264,15 @@ class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name```
+        return self.name
+```
 
 Pada contoh di atas, field user menggunakan ForeignKey untuk menghubungkan produk dengan pengguna. Parameter on_delete=models.CASCADE berarti jika pengguna dihapus, maka semua produk yang dimiliki oleh pengguna tersebut juga akan dihapus.
 
 2. Ketika menyimpan produk baru, kita perlu menetapkan pengguna yang sedang login sebagai pemilik produk tersebut. Maka kita akan ubah code dalam views
 
-```from django.shortcuts import render, redirect
+```
+from django.shortcuts import render, redirect
 from .models import Product
 from .forms import ProductForm
 
@@ -284,7 +286,8 @@ def create_product(request):
             return redirect('product_list')  # Ganti dengan nama URL tujuan
     else:
         form = ProductForm()
-    return render(request, 'create_product.html', {'form': form})```
+    return render(request, 'create_product.html', {'form': form})
+```
 
 Ketika kita membuat form di Django dan mengirimkannya, Django biasanya langsung menyimpan data yang diisi ke dalam database. Namun, terkadang kita ingin memodifikasi datanya terlebih dahulu sebelum benar-benar menyimpannya. Di sinilah commit=False berguna.
 
@@ -293,7 +296,8 @@ Biasanya, ketika form divalidasi dan disimpan dengan form.save(), Django langsun
 3. Ubah show_main
 Kode Product.objects.filter(user=request.user) akan menyaring semua data Product yang ada di database dan hanya mengambil data yang terhubung dengan pengguna yang sedang login. Django memanfaatkan request.user untuk mengetahui siapa pengguna yang sedang login, dan filter(user=request.user) akan membatasi hasilnya hanya untuk pengguna tersebut. Pada bagian context = {'name': request.user.username, ...}, nama pengguna yang login akan diambil dengan request.user.username dan disimpan dalam konteks. Kode ini memastikan bahwa nama pengguna (username) bisa ditampilkan di halaman, sehingga pengguna yang sedang login dapat melihat namanya sendiri.
 
-```@login_required(login_url='/login')
+```
+@login_required(login_url='/login')
 def show_main(request):
     # Mengambil semua produk dari database yang ditambahkan oleh pengguna yang sedang login
     product_entries = Product.objects.filter(user=request.user)
@@ -308,12 +312,15 @@ def show_main(request):
     }
 
     # Render template 'main.html' dengan konteks yang sudah dibuat
-    return render(request, "main.html", context)```
+    return render(request, "main.html", context)
+```
 
 4. Migrasi Model
 
+```
 python manage.py makemigrations
 python manage.py migrate
+```
 
 5. Mempersiapkan aplikasi web kita untuk environtment production. Untuk itu, tambahkan sebuah import baru pada settings.py 
 
@@ -321,9 +328,10 @@ import os
 
 Kemudian, ganti variabel DEBUG dari berkas settings.py menjadi seperti ini.
 
+```
 PRODUCTION = os.getenv("PRODUCTION", False)
 DEBUG = not PRODUCTION
-
+```
 
 
 
@@ -422,6 +430,7 @@ Contoh aplikasi yang belum menerapkan desain responsif: SIAKng.
 Berikut adalah penjelasan dan contohnya masing - masing:
 
 - Padding adalah ruang antara konten dan border, yang merupakan komponen berikutnya dari box. Kita bisa mengatur padding di setiap sisi. Contoh implementasinya adalah:
+```
 div {
     padding: 20px; /* Semua sisi akan diberi padding 20px */
     padding-top: 10px; /* Padding hanya pada bagian atas */
@@ -454,6 +463,7 @@ div {
             background-color: lightgray; 
         }
     </style>
+```
 
 
 
@@ -479,3 +489,88 @@ Sementara itu, CSS Grid Layout adalah sistem tata letak dua dimensi yang menggun
 - Lalu saya memodifikasi file login.html, register.html, create_product_entry menjadi styling tailwind. Untuk login.html saya menampilkan static image bernama sedih-banget.png yang akan ditampilkan sebelah login entry.
 - Saya juga membuat file card_product.html yang akan menampilkan card baru untuk setiap product entry baru. Dan di dalam nya ada button untuk edit product dan delete product.
 - Setelah menyelesaikan segala berkas html di template, saya akhirnya memodifikasi main.html agar segala berkas html lainnya dapat terintegrasi dengan baik.
+
+
+
+
+
+
+
+
+
+
+### TUGAS 6
+
+1. Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+
+JavaScript adalah bahasa pemrograman yang memungkinkan kita untuk membuat konten web secara dinamis, mengontrol multimedia, membuat animasi, dan banyak lagi. Beberapa manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web meliputi kemampuan untuk melakukan permintaan HTTP secara asinkronus, yang dikenal sebagai AJAX. Dengan cara ini, aplikasi web dapat mengambil atau mengirim data di latar belakang tanpa perlu memuat ulang halaman, meningkatkan interaktivitas bagi pengguna.
+
+Selain itu, JavaScript memiliki berbagai framework seperti React, Vue, dan Angular yang membantu membuat antarmuka pengguna lebih dinamis dan menarik. Bahasa ini juga umum digunakan di banyak browser, sehingga sangat mudah diakses di berbagai platform, menjadikannya pilihan populer untuk pengembangan fitur-fitur web.
+
+Fitur DOM (Document Object Model) dalam JavaScript memungkinkan pengembang untuk melakukan perubahan secara real-time berdasarkan tindakan pengguna. Dengan JavaScript, pengembang dapat menangani pengembangan baik di sisi server (back-end) maupun di sisi klien (front-end), yang mempermudah proses pengembangan dan penerapan aplikasi.
+
+Secara keseluruhan, JavaScript memainkan peran penting dalam pengembangan aplikasi web di internet. Bahasa ini membantu dalam mengatasi kompleksitas yang lebih tinggi dalam aplikasi, seperti pada mesin pencari, e-commerce, dan media sosial.
+
+
+
+
+2. Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?
+
+Dengan menggunakan await pada fungsi fetch(), kita dapat menulis kode asinkronus yang lebih mudah dipahami saat kita ingin mengelola respons dari permintaan HTTP. Ketika kita memulai permintaan HTTP, penggunaan await memungkinkan kita untuk "menunggu" hingga respons diterima sebelum melanjutkan ke baris kode berikutnya. Ini berarti bahwa thread utama tidak akan melanjutkan eksekusi sampai respons diterima, yang sangat berguna saat kita ingin mengambil data dari API atau melakukan operasi jaringan lainnya.
+
+Jika kita tidak menggunakan await, maka respons dari fetch() akan segera dikembalikan, tetapi program akan terus berjalan tanpa menunggu hingga respons diterima. Hal ini dapat menyebabkan kode kita tidak menyelesaikan tugas yang diharapkan karena kita mungkin mencoba untuk menggunakan data dari respons yang belum ada.
+
+
+
+
+3. Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+
+csrf_exempt adalah sebuah decorator di Django yang digunakan untuk menonaktifkan perlindungan Cross-Site Request Forgery (CSRF) pada suatu view atau fungsi. CSRF adalah jenis serangan di mana penyerang dapat memaksa pengguna untuk mengirimkan permintaan yang tidak diinginkan ke situs web, yang dapat membahayakan keamanan data pengguna.
+
+Secara default, Django menggunakan CSRF token untuk melindungi aplikasi dari serangan ini. Setiap kali ada permintaan POST, Django memeriksa keberadaan CSRF token dalam permintaan tersebut. Jika token tidak ada atau tidak valid, Django akan menolak permintaan tersebut.
+
+Namun, ada beberapa situasi di mana kita perlu menonaktifkan pemeriksaan CSRF, dan di sinilah csrf_exempt berperan. Misalnya:
+
+Data dari Layanan Eksternal: Jika view kita menerima data dari layanan eksternal atau API yang tidak bisa mengirimkan CSRF token, kita perlu menggunakan csrf_exempt. Dengan menambahkan decorator ini, Django tidak akan lagi memeriksa CSRF token untuk permintaan POST yang masuk ke view tersebut.
+
+Contoh penggunaannya dalam kode:
+
+```
+python
+Salin kode
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def add_product_entry_ajax(request):
+    # Logika untuk memproses permintaan POST di sini
+    ...
+```
+
+Meskipun csrf_exempt memudahkan pengiriman permintaan tanpa memeriksa token, penggunaannya harus diperhatikan dengan seksama. Menonaktifkan perlindungan CSRF dapat membuka celah keamanan, jadi sebaiknya hanya digunakan di tempat yang benar-benar diperlukan. Pastikan untuk memvalidasi dan memverifikasi data yang masuk dari sumber eksternal untuk menghindari potensi risiko keamanan.
+
+
+
+
+4. Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+
+Pembersihan data input di backend sangat penting untuk menjaga keamanan aplikasi. Pengguna bisa mematikan JavaScript atau menghindari validasi yang dilakukan di frontend, sehingga mereka tetap dapat mengirimkan data yang tidak valid atau berbahaya. Inilah alasan mengapa validasi di backend diperlukan, karena hanya di sini kita dapat memastikan bahwa data yang diterima bersih dan aman dari ancaman seperti serangan XSS atau kode berbahaya lainnya yang dapat membahayakan aplikasi.
+
+
+
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+Untuk membuat kode kartu data produk saya mendukung AJAX GET, langkah pertama yang saya lakukan adalah menambahkan dua import, yaitu csrf_exempt dan require_POST pada views.py dari django.views.decorators. Selanjutnya, saya membuat fungsi baru bernama add_product_entry_ajax yang menerima parameter request, seperti yang dijelaskan di tutorial. Fungsi ini berisi variabel user, name, price, description. Di dalam fungsi, saya membuat objek baru bernama new_product yang dibuat secara manual berdasarkan data-data yang dikirimkan dari POST request.
+
+Setelah fungsi tersebut selesai, saya menambahkan routing untuk add_product_entry_ajax dan mengatur path URL create-ajax di dalam urlpatterns. Selanjutnya, saya memperbarui cara menampilkan data produk dengan menghapus bagian product_entries = Product.objects.filter(user=request.user) dan juga menghapus 'product_entries': product_entries. Disini saya mendapatkan objek-objek product entry dari endpoint /json, sehingga kode di atas tidak diperlukan lagi. Saya kemudian mengubah baris pertama di view untuk show_json dan show_xml menjadi data = Product.objects.filter(user=request.user).
+
+Lalu penghapusan bagian kondisional dalam berkas main.html yang menampilkan pesan ketika tidak ada data produk (product_entries) dan menggantinya dengan elemen <div id="product_entry_cards"></div>. Dengan menghapus logika tersebut, tampilan tidak lagi menunjukkan pesan ketika tidak ada data produk. Penambahan elemen <div> ini berfungsi sebagai wadah untuk menampilkan kartu produk secara dinamis menggunakan JavaScript, seperti AJAX, sehingga data produk dapat dimuat dan ditampilkan tanpa perlu memuat ulang halaman.
+
+Selanjutnya, saya memodifikasi file main.html. Saya mengubah cara pengambilan data produk yang sebelumnya dilakukan langsung di template menjadi menggunakan AJAX GET. Dengan menggunakan fungsi getProductEntries() dalam JavaScript, saya mengirim permintaan AJAX GET ke URL yang telah ditentukan ({% url 'main:show_json' %}) untuk mendapatkan data produk dalam format JSON. Setelah menerima data, saya membersihkan area tampilan produk dengan productContainer.innerHTML = "", lalu menampilkan produk-produk tersebut secara dinamis di halaman dengan membuat elemen HTML untuk setiap produk.
+
+Membuat fungsi refreshProductEntries yang didefinisikan dalam block script pada berkas main.html yang bertujuan untuk memperbarui tampilan data produk secara asinkronus tanpa perlu memuat ulang halaman. Lalu menambahkan fitur modal yang memungkinkan pengguna untuk menambahkan entri produk baru tanpa harus menavigasi ke halaman lain. Modal ini berisi form yang meminta informasi tentang nama produk, price, dan description Kode ini mencakup elemen-elemen seperti header modal, body dengan form untuk input data, dan footer dengan tombol untuk menyimpan atau membatalkan. Selanjutnya menambahkan kode JavaScript yang mengatur tampilan modal. Fungsi showModal digunakan untuk menampilkan modal, dan hideModal untuk menyembunyikannya. Menambahkan event listener untuk tombol "Cancel" dan "Close" yang memanggil fungsi hideModal ketika diklik. Dan tambah tombol "Add New Product Entry" yang akan memicu fungsi showModal() untuk membuka modal.
+
+Selanjutnya, mengimplementasikan fungsi addProductEntry yang mengirimkan data dari form di modal ke server menggunakan AJAX. Setelah data berhasil ditambahkan, form akan direset dan modal akan ditutup. Sampai di tahap ini, pengguna dapat menambahkan entri produk baru melalui modal menggunakan AJAX, sehingga entri product dapat ditambahkan tanpa memuat ulang halaman.
+
+Selanjutnya menambahkan strip_tags untuk membersihkan data baru. Impor strip_tags lalu tambahkan pada fungsi add_product_entry_ajax di views.py, saya implementasi fungsi strip_tags pada data nama produk dan description sebelum data tersebut dimasukkan ke dalam ProductEntry. Dalam ProductEntryForm, tambahkan dua metode clean_name dan clean_description untuk memanggil strip_tags saat validasi. Lalu membersihkan data dengan DOMPurify dengan tambahan kode main.html <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script> Di dalam fungsi refreshProductEntries, saya gunakan DOMPurify.sanitize untuk membersihkan data name dan description sebelum ditampilkan serta ganti semua kemunculan item.fields.name menjadi name dan item.fields.description menjadi description.
+
